@@ -1,0 +1,52 @@
+{
+  "name": "transactions-frontend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/transactions-frontend/src",
+  "targets": {
+    "build": {
+      "executor": "@nx-plus/nuxt:browser",
+      "options": {
+        "buildDir": "dist/apps/transactions-frontend"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx-plus/nuxt:server",
+      "options": {
+        "browserTarget": "transactions-frontend:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "transactions-frontend:build:production",
+          "dev": false
+        }
+      }
+    },
+    "static": {
+      "executor": "@nx-plus/nuxt:static",
+      "options": {
+        "browserTarget": "transactions-frontend:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/transactions-frontend/**/*.{ts,tsx,vue}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/transactions-frontend"],
+      "options": {
+        "jestConfig": "apps/transactions-frontend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
